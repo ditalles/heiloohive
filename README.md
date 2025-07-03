@@ -1,71 +1,175 @@
-# Getting Started with Create React App
+🐝 HeilooHive - Professional Beehive Monitoring System
+A modern, professional-grade IoT beehive monitoring application providing real-time analytics, swarm detection, and honey production tracking. Built with React and integrated with ThingSpeak for seamless, secure sensor data collection and visualization.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Important:
+HeilooHive is designed to work together with both ThingSpeak (for cloud data storage and API access) and the beehive-monitoring repository (for sensor data acquisition and hardware integration). This app will not function as intended without these components.
 
-## Available Scripts
+🌟 Features
+📊 Real-Time Monitoring
+Live sensor data via ThingSpeak integration
+Auto-refresh every 5 minutes
+Connection status indicators and timestamps
+Multi-hive management with individual analytics
+🔍 Advanced Analytics
+Colony Health Score (0-100) with detailed contributing factors
+Swarm Risk Assessment with early warnings
+Honey Flow Analysis for production efficiency
+Long-term trend analysis with weekly patterns
+📈 Professional Charts
+Interactive line charts for sensor trends
+Bar charts for honey production
+Multi-axis plotting (temperature, humidity, weight, etc.)
+Statistical summaries (min/max/average)
+🚨 Smart Alerts
+Real-time notifications for critical thresholds
+Configurable alert levels
+Swarm detection algorithms
+Battery and sensor health tracking
+📱 Modern UI/UX
+Responsive design (desktop/mobile)
+Professional dashboard, intuitive navigation
+Four specialized analytics views
+Dark/light theme support
+🚀 Quick Start
+Demo Mode
+Try the app instantly—no hardware required!
 
-In the project directory, you can run:
+Open the application
+Click "Try Demo Mode"
+Explore all features with realistic, simulated beehive data
+Production Mode
+1. ThingSpeak Setup
+bash
+# Create a ThingSpeak account at thingspeak.com
+# Create a new channel with these 8 fields:
+# 1: Weight (kg)
+# 2: Brood Temperature (°C)
+# 3: Inside Temperature (°C)
+# 4: Outside Temperature (°C)
+# 5: Battery Voltage (V)
+# 6: Humidity (%)
+# 7: DHT Temperature (°C)
+# 8: GPS Valid (0/1)
+2. Hardware Example (from beehive-monitoring repo)
+C++
+#include <WiFi.h>
+#include <ThingSpeak.h>
 
-### `npm start`
+// ThingSpeak settings
+unsigned long channelID = YOUR_CHANNEL_ID;
+const char* writeAPIKey = "YOUR_WRITE_API_KEY";
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+void sendSensorData() {
+    ThingSpeak.setField(1, hiveWeight);
+    ThingSpeak.setField(2, broodTemperature);
+    ThingSpeak.setField(3, insideTemperature);
+    ThingSpeak.setField(4, outsideTemperature);
+    ThingSpeak.setField(5, batteryVoltage);
+    ThingSpeak.setField(6, humidity);
+    ThingSpeak.setField(7, dhtTemperature);
+    ThingSpeak.setField(8, gpsValid);
+    ThingSpeak.writeFields(channelID, writeAPIKey);
+}
+3. App Setup
+Enter your ThingSpeak Channel ID and Read API Key in app settings
+Click "Test Connection" to verify
+Log in and start monitoring your hives!
+📋 Installation
+Prerequisites
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Node.js 16+ and npm
+Modern web browser (ES6+)
+ThingSpeak account (for real data)
+beehive-monitoring hardware/software sending sensor data to ThingSpeak
+Local Development
 
-### `npm test`
+bash
+git clone https://github.com/ditalles/heiloohive.git
+cd heiloohive
+npm install
+npm start
+# Visit http://localhost:3000
+Production Build
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+bash
+npm run build
+# Deploy the /build folder to your preferred hosting (Vercel, Netlify, AWS S3, etc.)
+🔧 Configuration
+Environment Variables (.env):
 
-### `npm run build`
+env
+# Optional: Firebase config
+REACT_APP_FIREBASE_API_KEY=your_firebase_api_key
+REACT_APP_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+REACT_APP_FIREBASE_PROJECT_ID=your_project_id
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Optional: App config
+REACT_APP_APP_NAME=HeilooHive
+REACT_APP_VERSION=1.0.6
+ThingSpeak Field Mapping:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Field	Sensor	Unit	Description
+1	Weight	kg	Hive weight from load cell
+2	Brood Temp	°C	Internal brood nest temperature
+3	Inside Temp	°C	Hive ambient temperature
+4	Outside Temp	°C	External weather temperature
+5	Battery Voltage	V	Sensor system battery voltage
+6	Humidity	%	Relative humidity inside hive
+7	DHT Temp	°C	Secondary temperature sensor
+8	GPS Valid	0/1	GPS location lock status
+📊 Analytics Explained
+Colony Health Score
+Calculated from:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Temperature stability (35-37°C optimal)
+Weight trends (growth vs. decline)
+Humidity extremes
+Sensor battery status
+Swarm Risk Assessment
+Monitors for:
 
-### `npm run eject`
+Rapid weight loss
+Temperature instability
+High activity fluctuations
+Seasonal patterns
+Honey Flow Analysis
+Tracks:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Daily/weekly weight gains
+Production quality and efficiency
+Bloom period patterns
+🛠 Hardware Recommendations
+Load Cell: HX711 + 50kg
+Temperature: DS18B20 sensors
+Humidity: DHT22 or BME280
+Power: Solar panel + LiPo battery
+Microcontroller: ESP32 (WiFi) or Arduino+WiFi/LoRa
+Enclosure: Weatherproof box, ventilated, secure mounting
+🔒 Security & Privacy
+All data stored securely on ThingSpeak
+Read-only API access for app
+Encrypted local credential storage
+No sensitive data sent to third-party servers
+HTTPS connections and API key validation
+🤝 Contributing
+Fork the repo
+Create a feature branch (git checkout -b feature/amazing-feature)
+Commit changes (git commit -m 'Add amazing feature')
+Push and open a Pull Request
+Guidelines
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+React best practices, functional components & hooks
+Tailwind CSS for styling
+Add tests and update documentation for new features
+Bug Reports
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Browser/version, steps to reproduce
+Expected vs. actual behavior
+Console errors and channel config if relevant
+📄 License
+MIT License — see LICENSE
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Acknowledgments:
+ThingSpeak for IoT data platform, React, Tailwind CSS, Recharts, and the open source community.
+HeilooHive is designed specifically for beekeepers looking for advanced, real-time beehive insight and requires both the beehive-monitoring hardware/software and ThingSpeak integration for full operation.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# heiloohive

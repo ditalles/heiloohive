@@ -2,7 +2,7 @@
   "name": "heiloo-hive",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ditalles.github.io/heiloohive", // <--- ADD THIS LINE
+  "homepage": "https://ditalles.github.io/heiloohive",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -12,15 +12,15 @@
     "react-scripts": "5.0.1",
     "recharts": "^2.12.7",
     "web-vitals": "^2.1.4",
-    "gh-pages": "^6.1.1" // <--- ENSURE THIS IS HERE
+    "gh-pages": "^6.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build", // <--- ADD THIS LINE
-    "deploy": "gh-pages -d build" // <--- ADD THIS LINE
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
